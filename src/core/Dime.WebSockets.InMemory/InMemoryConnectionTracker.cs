@@ -27,7 +27,6 @@ namespace Dime.WebSockets.InMemory
 
         /// <summary>
         /// </summary>
-        /// <param name="key"></param>
         /// <returns></returns>
         public async Task<IEnumerable<T>> GetConnectionsAsync()
         {
@@ -49,29 +48,26 @@ namespace Dime.WebSockets.InMemory
         /// <summary>
         ///
         /// </summary>
-        /// <param name="key"></param>
         /// <param name="connection"></param>
         public async Task AddAsync(T connection)
         {
             if (connection == null)
-                throw new ArgumentNullException("connection");
+                throw new ArgumentNullException(nameof(connection));
 
-            Connections<T>.Instance().Users.AddOrUpdate(connection.ConnectionId, connection, (key, old) => { return connection; });
+            Connections<T>.Instance().Users.AddOrUpdate(connection.ConnectionId, connection, (key, old) => connection);
             await Task.FromResult(0);
         }
 
         /// <summary>
         ///
         /// </summary>
-        /// <param name="key"></param>
         /// <param name="connection"></param>
         public async Task RemoveAsync(T connection)
         {
             if (connection == null)
-                throw new ArgumentNullException("connection");
+                throw new ArgumentNullException(nameof(connection));
 
-            T metadata;
-            if (Connections<T>.Instance().Users.TryRemove(connection.ConnectionId, out metadata))
+            if (Connections<T>.Instance().Users.TryRemove(connection.ConnectionId, out _))
             {
             }
 

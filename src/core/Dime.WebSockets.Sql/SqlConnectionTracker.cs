@@ -22,7 +22,7 @@ namespace Dime.WebSockets.Sql
         /// <param name="factory"></param>
         public SqlConnectionTracker(IMultiTenantRepositoryFactory factory)
         {
-            this.ConnectionRepositoryFactory = factory;
+            ConnectionRepositoryFactory = factory;
         }
 
         #endregion Constructor
@@ -39,34 +39,20 @@ namespace Dime.WebSockets.Sql
         /// Adds connection to the data store if the unique connection ID doesn't exist yet
         /// </summary>
         /// <param name="key"></param>
-        /// <param name="connection"></param>
-        /// <history>
-        /// [HB] 31/12/2015 - Item existence check
-        /// </history>
         public async Task AddAsync(T key)
         {
-            IRepository<T> repository = this.ConnectionRepositoryFactory.Create<T>();
+            IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
             IEnumerable<T> connections = await repository.FindAllAsync(x => x.ConnectionId == key.ConnectionId);
-            if (connections.Count() == 0)
-            {
+            if (!connections.Any())
                 await repository.CreateAsync(key);
-            }
-            else
-            {
-                // Record already exists, do nothing
-            }
         }
 
         /// <summary>
         /// </summary>
-        /// <param name="key"></param>
         /// <returns></returns>
-        /// <history>
-        /// [HB] 31/12/2015 - Review
-        /// </history>
         public async Task<IEnumerable<T>> GetConnectionsAsync()
         {
-            IRepository<T> repository = this.ConnectionRepositoryFactory.Create<T>();
+            IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
             return await repository.FindAllAsync(null);
         }
 
@@ -75,12 +61,9 @@ namespace Dime.WebSockets.Sql
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        ///  <history>
-        /// [HB] 31/12/2015 - Review
-        /// </history>
         public async Task<IEnumerable<T>> GetConnectionsAsync(Expression<Func<T, bool>> filter)
         {
-            IRepository<T> repository = this.ConnectionRepositoryFactory.Create<T>();
+            IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
             return await repository.FindAllAsync(filter);
         }
 
@@ -88,13 +71,9 @@ namespace Dime.WebSockets.Sql
         ///
         /// </summary>
         /// <param name="key"></param>
-        /// <param name="connection"></param>
-        ///  <history>
-        /// [HB] 31/12/2015 - Review
-        /// </history>
         public async Task RemoveAsync(T key)
         {
-            IRepository<T> repository = this.ConnectionRepositoryFactory.Create<T>();
+            IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
             await repository.DeleteAsync(int.Parse(key.ToString()));
         }
 
@@ -104,7 +83,7 @@ namespace Dime.WebSockets.Sql
         /// <returns></returns>
         public async Task Clear()
         {
-            IRepository<T> repository = this.ConnectionRepositoryFactory.Create<T>();
+            IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
             await repository.DeleteAsync(await repository.FindAllAsync());
         }
 

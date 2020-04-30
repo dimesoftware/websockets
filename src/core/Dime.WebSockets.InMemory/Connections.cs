@@ -22,15 +22,12 @@ namespace Dime.WebSockets.InMemory
         /// <returns></returns>
         public static Connections<T> Instance()
         {
-            if (instance == null)
+            if (instance != null) 
+                return instance;
+
+            lock (syncRoot)
             {
-                lock (syncRoot)
-                {
-                    if (instance == null)
-                    {
-                        instance = new Connections<T>();
-                    }
-                }
+                instance ??= new Connections<T>();
             }
 
             return instance;

@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netcoreapp2.0;netcoreapp1.1;net461;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net461;</TargetFrameworks>
     <Authors>Dimenics</Authors>
     <Company>Dimenics</Company>
     <Product>Dimenics</Product>
-    <Copyright>Copyright © 2017</Copyright>
+    <Copyright>Copyright © 2020</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>http://www.dimenics.com/products/dime-scheduler/</PackageProjectUrl>
     <PackageIconUrl>http://dimenuget.azurewebsites.net/Images/dimenuget.png</PackageIconUrl>
