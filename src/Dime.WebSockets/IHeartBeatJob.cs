@@ -4,8 +4,7 @@
     ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IHeartBeatJob<T>  where T : IWebSocketConnection
+    public interface IHeartBeatJob<T> where T : IWebSocketConnection
     {
-
     }
 }

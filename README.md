@@ -4,7 +4,7 @@
 
 [![Build Status](https://dev.azure.com/dimenicsbe/Utilities/_apis/build/status/dimenics.websockets?branchName=master)](https://dev.azure.com/dimenicsbe/Utilities/_build/latest?definitionId=176&branchName=master) ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/dimenicsbe/utilities/176)
 
-This is a simple library that can be used to keep track of SignalR connections. This is useful in multi-tenant instances where you don't want to broadcast data to other tenants.
+This is a lightweight project that can be used to keep track of SignalR connections. This is useful in multi-tenant instances where you don't want to broadcast data to other tenants. It hooks into SignalR and allows you to overwrite the default workflow.
 
 ## Getting Started
 
@@ -15,17 +15,21 @@ This is a simple library that can be used to keep track of SignalR connections. 
 
 This project provides a simple interface and a few implementations for that interface. This makes it configurable and easy to setup in the startup of the application. For example, it requires only 1 line of code to swap an in-memory connection tracker with a SQL connection tracker.
 
-## Build and Test
-
-- Run dotnet restore
-- Run dotnet build
-- Run dotnet test
-
 ## Installation
 
-Use the package manager NuGet to install Dime.Kendo:
+> 🚧 Warning: the packages are not available yet on NuGet.
+
+Use the package manager NuGet to install the base library:
 
 `dotnet add package Dime.WebSockets`
+
+Next it is up to you to decide which *persistence medium* you want to use:
+
+| Service         | Command                                       |
+| --------------- | --------------------------------------------- |
+| In memory cache | `dotnet add package Dime.WebSockets.InMemory` |
+| Sql             | `dotnet add package Dime.WebSockets.Sql`      |
+| Redis           | `dotnet add package Dime.WebSockets.Redis`    |
 
 ## Usage
 

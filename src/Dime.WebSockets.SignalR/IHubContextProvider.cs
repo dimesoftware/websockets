@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNet.SignalR;
+﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 
 namespace Dime.WebSockets.SignalR
@@ -16,5 +15,4 @@ namespace Dime.WebSockets.SignalR
         /// <returns>The hub context</returns>
         IHubContext GetContext<T>() where T : IHub;
     }
-
 }

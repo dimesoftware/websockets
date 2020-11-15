@@ -1,10 +1,10 @@
-﻿using Dime.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Dime.Logging;
+using Dime.Repositories;
 
 namespace Dime.WebSockets.Sql
 {
@@ -23,7 +23,7 @@ namespace Dime.WebSockets.Sql
             ConnectionRepositoryFactory = factory;
             Logger = logger;
         }
-        
+
         private IRepositoryFactory ConnectionRepositoryFactory { get; }
         private ILogger Logger { get; }
 

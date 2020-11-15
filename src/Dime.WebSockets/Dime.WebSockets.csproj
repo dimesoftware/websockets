@@ -23,9 +23,9 @@
     <Description>Web sockets contracts</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSource>True</IncludeSource>
-    <IncludeSymbols>True</IncludeSymbols> 
+    <IncludeSymbols>True</IncludeSymbols>
     <Version>1.1.1-alpha.1</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
-
 </Project>
