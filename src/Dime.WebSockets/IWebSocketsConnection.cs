@@ -5,7 +5,7 @@ namespace Dime.WebSockets
     /// <summary>
     ///
     /// </summary>
-    public interface IWebSocketsConnection
+    public interface IWebSocketConnection
     {
         /// <summary>
         /// 

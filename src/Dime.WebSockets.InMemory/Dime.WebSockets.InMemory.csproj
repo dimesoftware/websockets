@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Globals">
     <SccProjectName>SAK</SccProjectName>
@@ -13,17 +13,24 @@
     <Company>Dimenics</Company>
     <Product>Dimenics</Product>
     <Copyright>Copyright © 2020</Copyright>
-    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageIconUrl>https://github.com/dimenics/dimenics/blob/master/assets/dimenicslogo.png?raw=true</PackageIconUrl>
+    <PackageTags>Websockets;SignalR</PackageTags>
+    <RepositoryUrl>https://github.com/dimenics/ds-sdk</RepositoryUrl>
     <PackageProjectUrl>http://www.dimenics.com/products/dime-scheduler/</PackageProjectUrl>
-    <PackageIconUrl>http://dimenuget.azurewebsites.net/Images/dimenuget.png</PackageIconUrl>
-    <RepositoryUrl>https://dimenicsbe.visualstudio.com/DefaultCollection/Dime.Scheduler V2</RepositoryUrl>
-    <RepositoryType>Visual Studio Team Services</RepositoryType>
+    <RepositoryUrl>https://github.com/dimenics/websockets</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
-    <Description>Web sockets interfaces</Description>
+    <Description>Web sockets contracts</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
-    <Version>1.0.0.2</Version>
+    <Version>1.1.0-alpha.2</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dime.WebSockets\Dime.WebSockets.csproj" />
+  </ItemGroup>
 
 </Project>

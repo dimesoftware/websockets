@@ -1,10 +1,11 @@
-﻿using ServiceStack.Redis;
-using ServiceStack.Redis.Generic;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using ServiceStack.Redis;
+using ServiceStack.Redis.Generic;
 
 namespace Dime.WebSockets.Redis
 {
@@ -12,43 +13,32 @@ namespace Dime.WebSockets.Redis
     ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [ExcludeFromCodeCoverage]
     public class RedisConnectionTracker<T> : IConnectionTracker<T>
-        where T : class, IWebSocketsConnection, new()
+        where T : class, IWebSocketConnection, new()
     {
-        #region Constructor
-
         /// <summary>
         ///
         /// </summary>
-        /// <param name="factory"></param>
+        /// <param name="redisManager"></param>
         public RedisConnectionTracker(IRedisClientsManager redisManager)
         {
             RedisManager = redisManager;
         }
 
-        #endregion Constructor
-
-        #region Properties
-
-        private IRedisClientsManager RedisManager { get; set; }
-        public string Key { get; set; } = "dimescheduler:connections";
-
-        #endregion Properties
-
-        #region Methods
+        private IRedisClientsManager RedisManager { get; }
+        public string Key { get; set; } = "ws:connections";
 
         /// <summary>
         /// Gets all connections
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> GetConnectionsAsync()
+        public Task<IEnumerable<T>> GetConnectionsAsync()
         {
-            using (IRedisClient redisClient = RedisManager.GetClient())
-            {
-                IRedisTypedClient<T> redisTypedClient = redisClient.As<T>();
-                IRedisSet<T> items = redisTypedClient.Sets[Key];
-                return items.AsQueryable();
-            }
+            using IRedisClient redisClient = RedisManager.GetClient();
+            IRedisTypedClient<T> redisTypedClient = redisClient.As<T>();
+            IRedisSet<T> items = redisTypedClient.Sets[Key];
+            return Task.FromResult(items.AsEnumerable());
         }
 
         /// <summary>
@@ -56,21 +46,19 @@ namespace Dime.WebSockets.Redis
         /// </summary>
         /// <param name="filter">The filter to apply on the data set</param>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> GetConnectionsAsync(Expression<Func<T, bool>> filter)
+        public Task<IEnumerable<T>> GetConnectionsAsync(Expression<Func<T, bool>> filter)
         {
-            using (IRedisClient redisClient = RedisManager.GetClient())
-            {
-                IRedisTypedClient<T> redisTypedClient = redisClient.As<T>();
-                IRedisSet<T> items = redisTypedClient.Sets[Key];
-                return filter != null ? items.AsQueryable().Where(filter) : items.AsQueryable();
-            }
+            using IRedisClient redisClient = RedisManager.GetClient();
+            IRedisTypedClient<T> redisTypedClient = redisClient.As<T>();
+            IRedisSet<T> items = redisTypedClient.Sets[Key];
+            return Task.FromResult(filter != null ? items.AsQueryable().Where(filter).AsEnumerable() : items.AsEnumerable());
         }
 
         /// <summary>
         /// Adds connection to the data store if the unique connection ID doesn't exist yet
         /// </summary>
         /// <param name="connection">The connection to add</param>
-        public async Task AddAsync(T connection)
+        public Task AddAsync(T connection)
         {
             using (IRedisClient redisClient = RedisManager.GetClient())
             {
@@ -80,13 +68,15 @@ namespace Dime.WebSockets.Redis
                 if (items.Count(x => x.ConnectionId == connection.ConnectionId) == 0)
                     items.Add(connection);
             }
+
+            return Task.FromResult(0);
         }
 
         /// <summary>
         /// Removes the connection from the connection list
         /// </summary>
         /// <param name="connection">The connection to remove</param>
-        public async Task RemoveAsync(T connection)
+        public Task RemoveAsync(T connection)
         {
             using (IRedisClient redisClient = RedisManager.GetClient())
             {
@@ -94,13 +84,15 @@ namespace Dime.WebSockets.Redis
                 IRedisSet<T> items = redisTypedClient.Sets[Key];
                 items.Remove(connection);
             }
+
+            return Task.FromResult(0);
         }
 
         /// <summary>
         ///
         /// </summary>
         /// <returns></returns>
-        public async Task Clear()
+        public Task Clear()
         {
             using (IRedisClient redisClient = RedisManager.GetClient())
             {
@@ -109,12 +101,10 @@ namespace Dime.WebSockets.Redis
 
                 IEnumerable<T> connections = items.AsQueryable();
                 foreach (T connection in connections)
-                {
                     items.Remove(connection);
-                }
             }
-        }
 
-        #endregion Methods
+            return Task.FromResult(0);
+        }
     }
 }

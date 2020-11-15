@@ -1,8 +1,8 @@
-# Dime.WebSockets
+<p align="center"><img src="assets/collab.svg?raw=true" width="350" alt="Logo"></p>
 
-![Build Status](https://dev.azure.com/dimenicsbe/Utilities/_apis/build/status/System%20-%20MASTER%20-%20CI?branchName=master) [![Dime.WebSockets package in Dime.Scheduler feed in Azure Artifacts](https://feeds.dev.azure.com/dimenicsbe/_apis/public/Packaging/Feeds/a7b896fd-9cd8-4291-afe1-f223483d87f0/Packages/403c6937-3547-4722-a387-81242aa5a2aa/Badge)](https://dev.azure.com/dimenicsbe/Dime.Scheduler%20V2/_packaging?_a=package&feed=a7b896fd-9cd8-4291-afe1-f223483d87f0&package=403c6937-3547-4722-a387-81242aa5a2aa&preferRelease=true)
+# WebSockets
 
-## Introduction
+[![Build Status](https://dev.azure.com/dimenicsbe/Utilities/_apis/build/status/dimenics.websockets?branchName=master)](https://dev.azure.com/dimenicsbe/Utilities/_build/latest?definitionId=176&branchName=master) ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/dimenicsbe/utilities/176)
 
 This is a simple library that can be used to keep track of SignalR connections. This is useful in multi-tenant instances where you don't want to broadcast data to other tenants.
 
@@ -50,10 +50,10 @@ public class MyHub : Hub
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)
 
-Please make sure to update tests as appropriate.
+Pull requests are welcome. Please check out the contribution and code of conduct guidelines.
 
 ## License
 
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)

@@ -9,7 +9,7 @@ namespace Dime.WebSockets
     ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IConnectionTracker<T> where T : IWebSocketsConnection
+    public interface IConnectionTracker<T> where T : IWebSocketConnection
     {
         /// <summary>
         /// Gets all connections
