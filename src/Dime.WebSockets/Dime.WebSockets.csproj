@@ -1,12 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup Label="Globals">
-    <SccProjectName>SAK</SccProjectName>
-    <SccProvider>SAK</SccProvider>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccLocalPath>SAK</SccLocalPath>
-  </PropertyGroup>
-
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net461;net5.0;net6.0</TargetFrameworks>
     <Authors>Dime Software</Authors>
@@ -14,17 +6,17 @@
     <Product>Dime Software</Product>
     <Copyright>Copyright © 2021</Copyright>
     <PackageIconUrl>https://cdn.dime-software.com/dime-software/logo-shape.png</PackageIconUrl>
-    <PackageTags>WebsocketsSignalR</PackageTags>
-    <RepositoryUrl>https://github.com/dimenics/ds-sdk</RepositoryUrl>
+    <PackageTags>Websockets;SignalR</PackageTags>
+    <RepositoryUrl>https://github.com/dimesoftware/ds-sdk</RepositoryUrl>
     <PackageProjectUrl>http://www.dimescheduler.com</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/dimenics/websockets</RepositoryUrl>
+    <RepositoryUrl>https://github.com/dimesoftware/websockets</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Web sockets contracts</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>

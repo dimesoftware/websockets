@@ -91,7 +91,7 @@ namespace Dime.WebSockets.Sql
             try
             {
                 IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
-                await repository.DeleteAsync(int.Parse(key.ToString())).ConfigureAwait(false);
+                await repository.DeleteAsync(x => x.ConnectionId == key.ConnectionId).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
