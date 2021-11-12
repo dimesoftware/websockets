@@ -6,7 +6,7 @@
 
 <div align="center">
 
-[![Build Status](https://dev.azure.com/dimenicsbe/Utilities/_apis/build/status/dimenics.websockets?branchName=master)](https://dev.azure.com/dimenicsbe/Utilities/_build/latest?definitionId=176&branchName=master) ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/dimenicsbe/utilities/176)
+[![Build Status](https://dev.azure.com/dimesoftware/Utilities/_apis/build/status/dimenics.websockets?branchName=master)](https://dev.azure.com/dimesoftware/Utilities/_build/latest?definitionId=176&branchName=master) ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/dimesoftware/utilities/176)
 </div>
 
 This is a lightweight project that can be used to keep track of SignalR connections. This is useful in multi-tenant instances where you don't want to broadcast data to other tenants. It hooks into SignalR and allows you to overwrite the default workflow.
