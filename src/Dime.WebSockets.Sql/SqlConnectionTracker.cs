@@ -8,16 +8,8 @@ using Dime.Repositories;
 
 namespace Dime.WebSockets.Sql
 {
-    /// <summary>
-    ///
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public class SqlConnectionTracker<T> : IConnectionTracker<T> where T : class, IWebSocketConnection, new()
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SqlConnectionTracker{T}"/> class
-        /// </summary>
-        /// <param name="factory"></param>
         public SqlConnectionTracker(IRepositoryFactory factory, ILogger logger)
         {
             ConnectionRepositoryFactory = factory;
@@ -27,10 +19,6 @@ namespace Dime.WebSockets.Sql
         private IRepositoryFactory ConnectionRepositoryFactory { get; }
         private ILogger Logger { get; }
 
-        /// <summary>
-        /// Adds connection to the data store if the unique connection ID doesn't exist yet
-        /// </summary>
-        /// <param name="key"></param>
         public async Task AddAsync(T key)
         {
             try
@@ -46,15 +34,12 @@ namespace Dime.WebSockets.Sql
             }
         }
 
-        /// <summary>
-        /// </summary>
-        /// <returns></returns>
         public async Task<IEnumerable<T>> GetConnectionsAsync()
         {
             try
             {
                 IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
-                return await repository.FindAllAsync(null).ConfigureAwait(false);
+                return await repository.FindAllAsync().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -63,11 +48,6 @@ namespace Dime.WebSockets.Sql
             }
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="filter"></param>
-        /// <returns></returns>
         public async Task<IEnumerable<T>> GetConnectionsAsync(Expression<Func<T, bool>> filter)
         {
             try
@@ -82,10 +62,6 @@ namespace Dime.WebSockets.Sql
             }
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="key"></param>
         public async Task RemoveAsync(T key)
         {
             try
@@ -99,10 +75,6 @@ namespace Dime.WebSockets.Sql
             }
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <returns></returns>
         public async Task Clear()
         {
             try

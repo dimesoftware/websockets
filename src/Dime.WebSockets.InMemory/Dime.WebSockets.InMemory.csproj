@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net461;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net461;net7.0;net6.0</TargetFrameworks>
     <Authors>Dime Software</Authors>
     <Company>Dime Software</Company>
     <Product>Dime Software</Product>

@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net461;</TargetFrameworks>
+    <TargetFrameworks>net461;</TargetFrameworks>
     <Authors>Dime Software</Authors>
     <Company>Dime Software</Company>
     <Product>Dime Software</Product>
@@ -35,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ServiceStack.Redis.Core" Version="5.12.0" />
+    <PackageReference Include="ServiceStack.Redis.Core" Version="6.0.2" />
   </ItemGroup>
 
 </Project>

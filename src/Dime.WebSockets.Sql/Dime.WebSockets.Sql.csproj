@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net461;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net461;net7.0;net6.0</TargetFrameworks>
     <Authors>Dime Software</Authors>
     <Company>Dime Software</Company>
     <Product>Dime Software</Product>
@@ -16,14 +16,14 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
-    <Version>1.1.4</Version>
+    <Version>1.1.5</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Dime.Logging" Version="2.1.1" />
-    <PackageReference Include="Dime.Repositories" Version="1.2.4" />
+    <PackageReference Include="Dime.Repositories" Version="2.0.0-alpha.32" />
   </ItemGroup>
 
   <ItemGroup>
