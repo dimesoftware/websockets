@@ -12,7 +12,7 @@
     <Authors>Dime Software</Authors>
     <Company>Dime Software</Company>
     <Product>Dime Software</Product>
-    <Copyright>Copyright © 2021</Copyright>
+    <Copyright>Copyright © 2023</Copyright>
     <PackageIconUrl>https://cdn.dime-software.com/dime-software/logo-shape.png</PackageIconUrl>
     <PackageTags>Websockets;SignalR</PackageTags>
     <RepositoryUrl>https://github.com/dimesoftware/ds-sdk</RepositoryUrl>
@@ -24,7 +24,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSource>True</IncludeSource>
     <IncludeSymbols>True</IncludeSymbols>
-    <Version>1.1.2</Version>
+    <Version>1.1.3</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>

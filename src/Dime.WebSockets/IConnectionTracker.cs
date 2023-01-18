@@ -32,6 +32,13 @@ namespace Dime.WebSockets
         Task AddAsync(T connection);
 
         /// <summary>
+        /// Adds a connection to the connection list
+        /// </summary>
+        /// <param name="connection">The connection to add</param>
+        /// <returns></returns>
+        Task UpdateAsync(T connection);
+
+        /// <summary>
         /// Removes the connection from the connection list
         /// </summary>
         /// <param name="connection">The connection to remove</param>

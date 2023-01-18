@@ -19,27 +19,12 @@ namespace Dime.WebSockets.Sql
         private IRepositoryFactory ConnectionRepositoryFactory { get; }
         private ILogger Logger { get; }
 
-        public async Task AddAsync(T key)
-        {
-            try
-            {
-                IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
-                IEnumerable<T> connections = await repository.FindAllAsync(x => x.ConnectionId == key.ConnectionId).ConfigureAwait(false);
-                if (!connections.Any())
-                    await repository.CreateAsync(key).ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                Logger.Exception(ex.Message, ex);
-            }
-        }
-
         public async Task<IEnumerable<T>> GetConnectionsAsync()
         {
             try
             {
                 IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
-                return await repository.FindAllAsync().ConfigureAwait(false);
+                return await repository.FindAllAsync();
             }
             catch (Exception ex)
             {
@@ -53,7 +38,7 @@ namespace Dime.WebSockets.Sql
             try
             {
                 IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
-                return await repository.FindAllAsync(filter).ConfigureAwait(false);
+                return await repository.FindAllAsync(filter);
             }
             catch (Exception ex)
             {
@@ -62,12 +47,40 @@ namespace Dime.WebSockets.Sql
             }
         }
 
+        public async Task AddAsync(T key)
+        {
+            try
+            {
+                IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
+                IEnumerable<T> connections = await repository.FindAllAsync(x => x.ConnectionId == key.ConnectionId);
+                if (!connections.Any())
+                    await repository.CreateAsync(key);
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex.Message, ex);
+            }
+        }
+
+        public async Task UpdateAsync(T connection)
+        {
+            try
+            {
+                IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
+                await repository.UpdateAsync(connection);
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex.Message, ex);
+            }
+        }
+
         public async Task RemoveAsync(T key)
         {
             try
             {
                 IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
-                await repository.DeleteAsync(x => x.ConnectionId == key.ConnectionId).ConfigureAwait(false);
+                await repository.DeleteAsync(x => x.ConnectionId == key.ConnectionId);
             }
             catch (Exception ex)
             {
@@ -80,7 +93,7 @@ namespace Dime.WebSockets.Sql
             try
             {
                 IRepository<T> repository = ConnectionRepositoryFactory.Create<T>();
-                await repository.DeleteAsync(await GetConnectionsAsync().ConfigureAwait(false)).ConfigureAwait(false);
+                await repository.DeleteAsync(await GetConnectionsAsync());
             }
             catch (Exception ex)
             {
