@@ -26,15 +26,13 @@ namespace Dime.WebSockets.Redis
 
         private IRedisClientsManager RedisManager { get; }
 
-        public string Key { get; set; } = "ws:connections";
-
-        public virtual string GenerateKey(T connection) => connection.TenantId + ":" + Key;
+        public string Key { get; set; } = "connections";
 
         public Task<IEnumerable<T>> GetConnectionsAsync()
         {
             using IRedisClient redisClient = RedisManager.GetClient();
             IRedisTypedClient<T> redisTypedClient = redisClient.As<T>();
-            IRedisSet<T> items = redisTypedClient.Sets[Key];
+            IRedisSortedSet<T> items = redisTypedClient.SortedSets[Key];
             return Task.FromResult(items.AsEnumerable());
         }
 
@@ -42,7 +40,7 @@ namespace Dime.WebSockets.Redis
         {
             using IRedisClient redisClient = RedisManager.GetClient();
             IRedisTypedClient<T> redisTypedClient = redisClient.As<T>();
-            IRedisSet<T> items = redisTypedClient.Sets[Key];
+            IRedisSortedSet<T> items = redisTypedClient.SortedSets[Key];
             return Task.FromResult(filter != null ? items.AsQueryable().Where(filter).AsEnumerable() : items.AsEnumerable());
         }
 
@@ -51,10 +49,13 @@ namespace Dime.WebSockets.Redis
             using (IRedisClient redisClient = RedisManager.GetClient())
             {
                 IRedisTypedClient<T> redisTypedClient = redisClient.As<T>();
-                IRedisSet<T> items = redisTypedClient.Sets[GenerateKey(connection)];
+                IRedisSortedSet<T> items = redisTypedClient.SortedSets[Key];
 
                 if (!items.Any(x => x.ConnectionId == connection.ConnectionId))
-                    items.Add(connection);
+                {
+                    double score = new DateTimeOffset(connection.CreatedOn).ToUnixTimeSeconds();
+                    items.Add(connection, score);
+                }
             }
 
             return Task.FromResult(0);
@@ -65,12 +66,15 @@ namespace Dime.WebSockets.Redis
             using (IRedisClient redisClient = RedisManager.GetClient())
             {
                 IRedisTypedClient<T> redisTypedClient = redisClient.As<T>();
-                IRedisSet<T> items = redisTypedClient.Sets[GenerateKey(connection)];
-                items.Remove(connection);
+                IRedisSortedSet<T> items = redisTypedClient.SortedSets[Key];
+
+                double score = new DateTimeOffset(connection.CreatedOn).ToUnixTimeSeconds();
+                items.RemoveRangeByScore(score - 1, score + 1);
             }
 
             return Task.FromResult(0);
         }
+
 
         public Task Clear()
         {
@@ -89,9 +93,9 @@ namespace Dime.WebSockets.Redis
         {
             using IRedisClient redisClient = RedisManager.GetClient();
             IRedisTypedClient<T> redisTypedClient = redisClient.As<T>();
-            IRedisSet<T> items = redisTypedClient.Sets[GenerateKey(connection)];
+            IRedisSortedSet<T> items = redisTypedClient.SortedSets[Key];
 
-            // TODO            
+            // TODO
         }
     }
 }
