@@ -18,8 +18,17 @@ namespace Dime.WebSockets.Redis
             RedisManager = redisManager;
         }
 
+        public RedisConnectionTracker(IRedisClientsManager redisManager, string key)
+            : this(redisManager)
+        {
+            Key = key;
+        }
+
         private IRedisClientsManager RedisManager { get; }
+
         public string Key { get; set; } = "ws:connections";
+
+        public virtual string GenerateKey(T connection) => connection.TenantId + ":" + Key;
 
         public Task<IEnumerable<T>> GetConnectionsAsync()
         {
@@ -42,9 +51,9 @@ namespace Dime.WebSockets.Redis
             using (IRedisClient redisClient = RedisManager.GetClient())
             {
                 IRedisTypedClient<T> redisTypedClient = redisClient.As<T>();
-                IRedisSet<T> items = redisTypedClient.Sets[Key];
+                IRedisSet<T> items = redisTypedClient.Sets[GenerateKey(connection)];
 
-                if (items.Count(x => x.ConnectionId == connection.ConnectionId) == 0)
+                if (!items.Any(x => x.ConnectionId == connection.ConnectionId))
                     items.Add(connection);
             }
 
@@ -56,7 +65,7 @@ namespace Dime.WebSockets.Redis
             using (IRedisClient redisClient = RedisManager.GetClient())
             {
                 IRedisTypedClient<T> redisTypedClient = redisClient.As<T>();
-                IRedisSet<T> items = redisTypedClient.Sets[Key];
+                IRedisSet<T> items = redisTypedClient.Sets[GenerateKey(connection)];
                 items.Remove(connection);
             }
 
@@ -68,11 +77,9 @@ namespace Dime.WebSockets.Redis
             using (IRedisClient redisClient = RedisManager.GetClient())
             {
                 IRedisTypedClient<T> redisTypedClient = redisClient.As<T>();
-                IRedisSet<T> items = redisTypedClient.Sets[Key];
-
-                IEnumerable<T> connections = items.AsQueryable();
-                foreach (T connection in connections)
-                    items.Remove(connection);
+                T[] keys = redisTypedClient.SearchKeys("*:" + Key);
+                foreach (T key in keys)
+                    redisTypedClient.Delete(key);
             }
 
             return Task.FromResult(0);
@@ -82,9 +89,9 @@ namespace Dime.WebSockets.Redis
         {
             using IRedisClient redisClient = RedisManager.GetClient();
             IRedisTypedClient<T> redisTypedClient = redisClient.As<T>();
-            IRedisSet<T> items = redisTypedClient.Sets[Key];
+            IRedisSet<T> items = redisTypedClient.Sets[GenerateKey(connection)];
 
-            // TODO
+            // TODO            
         }
     }
 }
