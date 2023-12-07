@@ -1,41 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net8.0</TargetFrameworks>
+		<Authors>Dime Software</Authors>
+		<Company>Dime Software</Company>
+		<Product>Dime.WebSockets</Product>
+		<Copyright>Copyright © 2023</Copyright>
+		<PackageIconUrl>https://cdn.dime-software.com/dime-software/logo-shape.png</PackageIconUrl>
+		<PackageTags>Websockets;SignalR</PackageTags>
+		<RepositoryUrl>https://github.com/dimesoftware/websockets</RepositoryUrl>
+		<PackageProjectUrl>http://www.dimescheduler.com</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/dimesoftware/websockets</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<NeutralLanguage>en</NeutralLanguage>
+		<Description>Web socket connection tracker using Redis</Description>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<IncludeSource>True</IncludeSource>
+		<IncludeSymbols>True</IncludeSymbols>
+		<Version>2.0.0</Version>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
 
-  <PropertyGroup Label="Globals">
-    <SccProjectName>SAK</SccProjectName>
-    <SccProvider>SAK</SccProvider>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccLocalPath>SAK</SccLocalPath>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Dime.WebSockets\Dime.WebSockets.csproj" />
+	</ItemGroup>
 
-  <PropertyGroup>
-    <TargetFrameworks>net461;</TargetFrameworks>
-    <Authors>Dime Software</Authors>
-    <Company>Dime Software</Company>
-    <Product>Dime Software</Product>
-    <Copyright>Copyright © 2021</Copyright>
-    <PackageIconUrl>https://cdn.dime-software.com/dime-software/logo-shape.png</PackageIconUrl>
-    <PackageTags>Websockets;SignalR</PackageTags>
-    <RepositoryUrl>https://github.com/dimesoftware/ds-sdk</RepositoryUrl>
-    <PackageProjectUrl>http://www.dimescheduler.com</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/dimesoftware/websockets</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <NeutralLanguage>en</NeutralLanguage>
-    <Description>Web socket connection tracker using Redis</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <IncludeSource>True</IncludeSource>
-    <IncludeSymbols>True</IncludeSymbols>
-    <Version>1.1.2</Version>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Dime.WebSockets\Dime.WebSockets.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="ServiceStack.Redis.Core" Version="6.0.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="ServiceStack.Redis.Core" Version="8.0.0" />
+	</ItemGroup>
 
 </Project>
