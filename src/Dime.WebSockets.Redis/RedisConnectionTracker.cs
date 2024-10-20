@@ -75,7 +75,6 @@ namespace Dime.WebSockets.Redis
             return Task.FromResult(0);
         }
 
-
         public Task Clear()
         {
             using (IRedisClient redisClient = RedisManager.GetClient())

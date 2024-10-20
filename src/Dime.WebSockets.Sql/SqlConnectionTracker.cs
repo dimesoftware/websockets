@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Dime.Logging;
 using Dime.Repositories;
+using Microsoft.Extensions.Logging;
 
 namespace Dime.WebSockets.Sql
 {
@@ -28,8 +28,8 @@ namespace Dime.WebSockets.Sql
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex.Message, ex);
-                return new List<T>();
+                Logger.LogError(ex, ex.Message);
+                return [];
             }
         }
 
@@ -42,8 +42,8 @@ namespace Dime.WebSockets.Sql
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex.Message, ex);
-                return new List<T>();
+                Logger.LogError(ex, ex.Message);
+                return [];
             }
         }
 
@@ -58,7 +58,7 @@ namespace Dime.WebSockets.Sql
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex.Message, ex);
+                Logger.LogError(ex, ex.Message);
             }
         }
 
@@ -71,7 +71,7 @@ namespace Dime.WebSockets.Sql
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex.Message, ex);
+                Logger.LogError(ex, ex.Message);
             }
         }
 
@@ -84,7 +84,7 @@ namespace Dime.WebSockets.Sql
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex.Message, ex);
+                Logger.LogError(ex, ex.Message);
             }
         }
 
@@ -97,7 +97,7 @@ namespace Dime.WebSockets.Sql
             }
             catch (Exception ex)
             {
-                Logger.Exception(ex.Message, ex);
+                Logger.LogError(ex, ex.Message);
             }
         }
     }
