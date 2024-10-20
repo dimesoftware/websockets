@@ -26,7 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ServiceStack.Redis.Core" Version="8.0.0" />
+		<PackageReference Include="ServiceStack.Redis.Core" Version="8.4.0" />
 	</ItemGroup>
 
 </Project>
