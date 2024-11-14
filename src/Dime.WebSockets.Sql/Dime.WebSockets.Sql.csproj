@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net8.0</TargetFrameworks>
+		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 		<Authors>Dime Software</Authors>
 		<Company>Dime Software</Company>
 		<Product>Dime Software</Product>
-		<Copyright>Copyright © 2023</Copyright>
+		<Copyright>Copyright © 2024</Copyright>
 		<PackageIconUrl>https://cdn.dime-software.com/dime-software/logo-shape.png</PackageIconUrl>
 		<PackageTags>Websockets;SignalR</PackageTags>
 		<RepositoryUrl>https://github.com/dimesoftware/websockets</RepositoryUrl>
@@ -16,14 +16,14 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<IncludeSource>True</IncludeSource>
 		<IncludeSymbols>True</IncludeSymbols>
-		<Version>2.1.0</Version>
+		<Version>2.2.0</Version>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Dime.Repositories" Version="2.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
